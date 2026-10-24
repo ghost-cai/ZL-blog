@@ -24,8 +24,7 @@ enableGitInfo = false
   ShowCodeCopyButtons = true
   # 文章所在的内容目录（归档页、相关文章都依赖它）
   mainSections = ["posts"]
-  # 开启文章页评论区（内容由 layouts/_partials/comments.html 渲染）
-  comments = true
+  # 评论区开关：存在 [params.comments.giscus] 表即为开启（内容由 layouts/_partials/comments.html 渲染）
 
   [params.homeInfoParams]
     Title = "你好，欢迎来到我的博客"
