@@ -93,3 +93,36 @@ hugo server -D --navigateToUpdatedFiles
 | 新建文章 | `hugo new content posts/标题.md` |
 | 发布 | `./sync.sh "说明"` |
 | 本地生成静态文件 | `hugo --minify` |
+
+## 八、纯网页发布（零命令、零额外服务）
+
+不想装工具、不想碰终端时，直接用 GitHub 网页就能写文章并发布。因为项目已配好 Actions，只要往仓库 `content/posts/` 里提交 `.md`，就会自动构建上线。
+
+### 发布一篇新文章
+
+1. 打开 `https://github.com/ghost-cai/ZL-blog` → 进入 `content/posts` 目录。
+2. 点右上角 **Add file → Create new file**。
+3. 文件名填：`2026-10-25-我的文章.md`（日期-标题，英文或拼音，空格用 `-`）。
+4. 内容照下面的模板写（**`draft: false` 才会被发布**）：
+
+   ```markdown
+   ---
+   title: "我的文章标题"
+   date: 2026-10-25T20:00:00+08:00
+   draft: false
+   tags: ["随笔"]
+   ---
+
+   正文从这里开始，支持 **加粗**、列表、代码块、图片等 Markdown 语法。
+   图片放在 `static/images/` 后，用 `![图](/images/xxx.png)` 引用。
+   ```
+
+5. 页面底部 **Commit changes** 直接提交到 `main` 分支。
+6. 等约 1–2 分钟，去仓库 **Actions** 看构建变绿，访问 `https://ghost-cai.github.io/ZL-blog/` 即可看到。
+
+### 编辑 / 删除已有文章
+
+- 在 `content/posts` 里点开某篇 `.md` → 右上角铅笔图标 ✏️ 即可改，改完 Commit。
+- 删除：进文件后点 **··· → Delete file**，再 Commit。
+
+> 小提示：网页里没有实时预览，发文后去博客页面确认样式即可。需要更精致的写作体验再回到「用 MarkText 写作 + 本地预览」方案。
