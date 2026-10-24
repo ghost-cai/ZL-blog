@@ -66,9 +66,9 @@ enableGitInfo = false
 # 注意：repoId / categoryId 为空时不会渲染评论框（避免报错），填好即自动生效。
 [params.comments.giscus]
   repo = "ghost-cai/ZL-blog"
-  repoId = ""
+  repoId = "1432302302"
   category = "Announcements"
-  categoryId = ""
+  categoryId = "DIC_kwDOVV8y3s4DJhOB"
   mapping = "pathname"
   strict = false
   reactionsEnabled = true
