@@ -1,0 +1,127 @@
+/* =========================================================================
+   ZL-blog 自定义样式（在 PaperMod 之上叠加，主题升级不丢失）
+   改这里即可调整全站观感。每一块都标了「可改点」。
+   ========================================================================= */
+
+/* ---------- 0. 主题色（可改点：换 --accent 就是换全站强调色）---------- */
+:root {
+  --accent: #5b8def;          /* 浅色模式强调色：链接/悬停光晕/进度条 */
+  --accent-strong: #3f6fd6;
+}
+:root[data-theme="dark"] {
+  --accent: #7aa2ff;          /* 深色模式强调色 */
+  --accent-strong: #5b8def;
+}
+
+/* ---------- 1. 全站配色（覆盖 PaperMod 变量）---------- */
+:root {
+  --theme: #f6f7f9;           /* 页面背景 */
+  --entry: #ffffff;            /* 卡片背景 */
+  --primary: #1f2430;         /* 主标题/强文字 */
+  --content: #2b3038;         /* 正文 */
+  --secondary: #6b7280;       /* 次要文字 */
+  --tertiary: #e8eaee;        /* 分割线/浅块 */
+  --border: #e6e8ec;          /* 边框 */
+  --code-bg: #f0f2f5;         /* 行内代码背景 */
+  --radius: 14px;             /* 圆角（可改大/小） */
+}
+:root[data-theme="dark"] {
+  --theme: #15171c;
+  --entry: #1e2128;
+  --primary: #e8eaf0;
+  --content: #c4c8d0;
+  --secondary: #9aa0ac;
+  --tertiary: #2a2e37;
+  --border: #2a2e37;
+  --code-bg: #23262e;
+  --radius: 14px;
+}
+
+/* 字体（含中文回退） */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Microsoft YaHei", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ---------- 2. 文章列表卡片：玻璃质感 + 悬停浮起发光 ---------- */
+.post-entry {
+  border-radius: var(--radius);
+  padding: 1.5rem 1.6rem;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.post-entry:hover,
+.post-entry:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 30px rgba(91, 141, 239, 0.18);
+}
+.post-entry:hover .entry-header h2 {
+  color: var(--accent);
+}
+.entry-header h2 {
+  transition: color 0.25s ease;
+}
+
+/* 首篇 hero 卡片更突出 */
+.first-entry {
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--entry), var(--tertiary));
+}
+
+/* ---------- 3. 导航：悬停渐变发光 ---------- */
+.nav ul li a {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.nav ul li a:hover {
+  color: var(--accent);
+  text-shadow: 0 0 6px rgba(122, 162, 255, 0.45);
+}
+.nav .logo a {
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+.nav .logo a:hover {
+  color: var(--accent);
+  transform: scale(1.02);
+}
+
+/* ---------- 4. 正文排版：行高/宽度更舒适 ---------- */
+.post-content {
+  line-height: 1.85;
+  font-size: 16px;
+}
+.post-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- 5. 回到顶部按钮：圆形强调色 ---------- */
+.top-link {
+  background: var(--accent);
+  color: #fff;
+  width: 2.75rem;
+  height: 2.75rem;
+  box-shadow: 0 4px 14px rgba(91, 141, 239, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.top-link:hover {
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(91, 141, 239, 0.45);
+}
+.top-link svg { filter: none; }
+
+/* ---------- 6. 阅读进度条（由 extend_footer.html 注入元素）---------- */
+#reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  z-index: 999;
+  transition: width 0.1s linear;
+}
