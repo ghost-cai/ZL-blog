@@ -43,7 +43,9 @@ my-blog/
 hugo server -D --navigateToUpdatedFiles
 ```
 
-浏览器打开 http://localhost:1313 。在 MarkText 里保存 `.md`，页面会**自动热重载**。
+浏览器打开 **http://localhost:1313/ZL-blog/** ⚠️ 注意：因为 `baseURL` 带子路径 `/ZL-blog`，`hugo server` 会在该子路径下提供服务，访问 `http://localhost:1313` 根路径会显示 404，这是正常的。
+
+在 MarkText 里保存 `.md`，页面会**自动热重载**。
 > 注意：MarkText 自带的预览 ≠ 博客最终样式，以 `hugo server` 为准。
 
 ## 三、用 MarkText 写作
