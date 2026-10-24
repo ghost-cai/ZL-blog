@@ -1,4 +1,4 @@
-baseURL = "https://<你的GitHub用户名>.github.io/"
+baseURL = "https://ghost-cai.github.io/"
 languageCode = "zh-cn"
 title = "我的博客"
 theme = "PaperMod"
@@ -21,7 +21,7 @@ enableGitInfo = false
     Content = "这里记录我的随笔、学习与思考。"
 
   [params.social]
-    GitHub = "https://github.com/<你的GitHub用户名>"
+    GitHub = "https://github.com/ghost-cai"
     Email = ""
 
 [[menu.main]]
@@ -36,16 +36,16 @@ enableGitInfo = false
   url = "/about/"
   weight = 2
 
-# 评论系统（Giscus，可选）：到 giscus.app 生成参数后填入即可启用
-[params.comments.giscus]
-  repo = "<你的GitHub用户名>/<你的仓库名>"
-  repoId = ""
-  category = "Announcements"
-  categoryId = ""
-  mapping = "pathname"
-  strict = false
-  reactionsEnabled = true
-  emitMetadata = false
-  inputPosition = "bottom"
-  lang = "zh-CN"
-  loading = "lazy"
+# 评论系统（Giscus，可选）：到 giscus.app 生成参数后，取消下面注释并填入即可启用
+# [params.comments.giscus]
+#   repo = "ghost-cai/ghost-cai.github.io"
+#   repoId = ""
+#   category = "Announcements"
+#   categoryId = ""
+#   mapping = "pathname"
+#   strict = false
+#   reactionsEnabled = true
+#   emitMetadata = false
+#   inputPosition = "bottom"
+#   lang = "zh-CN"
+#   loading = "lazy"

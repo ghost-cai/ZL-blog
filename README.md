@@ -21,7 +21,16 @@ my-blog/
 ## 一、本地环境准备
 
 1. 安装 **Hugo（extended 版）**
-   - macOS：去 https://github.com/gohugoio/hugo/releases 下载 `hugo_extended_*_darwin-universal.pkg` 安装；或装了 Homebrew 则 `brew install hugo`。
+   - 方式 A（推荐，无需 Homebrew）：下载官方安装包
+     `https://github.com/gohugoio/hugo/releases/download/v0.168.0/hugo_extended_0.168.0_darwin-universal.pkg`
+     双击安装即可（会装到 `/usr/local/bin/hugo`）。若提示“无法验证开发者”，在「系统设置 → 隐私与安全性」点“仍要打开”，或先执行：
+     `xattr -d com.apple.quarantine ~/Downloads/hugo_extended_0.168.0_darwin-universal.pkg`
+   - 方式 B（已有 Homebrew）：`brew install hugo`
+   - 命令行一键安装法（下载后用 installer 安装）：
+     ```bash
+     curl -L -o ~/Downloads/hugo.pkg https://github.com/gohugoio/hugo/releases/download/v0.168.0/hugo_extended_0.168.0_darwin-universal.pkg
+     sudo installer -pkg ~/Downloads/hugo.pkg -target /
+     ```
    - 校验：`hugo version`（建议 ≥ 0.168.0，与 deploy.yml 中 HUGO_VERSION 一致）。
 2. 安装 **MarkText**：https://marktext.github.io/website/ （写作编辑器，本项目用它写 .md）。
 3. 安装 **Git**（macOS 一般自带）。
@@ -60,21 +69,21 @@ hugo server -D --navigateToUpdatedFiles
 
 ## 五、连接到你自己的 GitHub 仓库
 
-1. 在 GitHub 新建仓库（建议命名为 `<用户名>.github.io` 以得到根域名）。
+1. 在 GitHub 新建仓库（命名为 `ghost-cai.github.io` 以得到根域名 `https://ghost-cai.github.io/`）。
 2. 本项目已 `git init`（分支 main），添加远程并推送：
 
    ```bash
-   git remote add origin https://github.com/<你的用户名>/<你的仓库>.git
+   git remote add origin https://github.com/ghost-cai/ghost-cai.github.io.git
    git push -u origin main
    ```
 
 3. 仓库 **Settings → Pages → Source 选择 "GitHub Actions"**。
-4. 推送后到 Actions 标签页看构建，成功后访问 `https://<用户名>.github.io/`。
+4. 推送后到 Actions 标签页看构建，成功后访问 `https://ghost-cai.github.io/`。
 
 ## 六、开始之前要改的占位符
 
-- `config.toml` 里的 `baseURL`、GitHub 用户名、`[params.comments.giscus]`（想要评论才填）。
-- 想用自定义域名：在域名商加 CNAME 指向 `<用户名>.github.io`，并在 Pages 设置里填写并开启 Enforce HTTPS（也可放 `static/CNAME`）。
+- `config.toml` 的 `baseURL`、GitHub 链接已填入 `ghost-cai`；评论（Giscus）默认关闭，想要时取消注释并到 giscus.app 生成参数。
+- 想用自定义域名：在域名商加 CNAME 指向 `ghost-cai.github.io`，并在 Pages 设置里填写并开启 Enforce HTTPS（也可放 `static/CNAME`）。
 
 ## 七、常用命令速查
 
