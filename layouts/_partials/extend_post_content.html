@@ -1,0 +1,18 @@
+{{- /* 相关文章：基于 Hugo 内置 Related（标签/章节相似度），仅文章页渲染 */ -}}
+{{- $sections := site.Params.mainSections | default (slice "posts") }}
+{{- if and (eq .Kind "page") (in $sections .Section) }}
+{{- $related := .Site.RegularPages.Related . | first 5 }}
+{{- if gt (len $related) 0 }}
+<section class="related-posts">
+  <h2 class="related-title">📎 相关文章</h2>
+  <ul class="related-list">
+    {{- range $related }}
+    <li class="related-item">
+      <a class="related-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <span class="related-date">{{ .Date.Format "2006-01-02" }}</span>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- end }}

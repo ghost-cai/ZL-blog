@@ -1,0 +1,23 @@
+{{- /* Comments area start */ -}}
+{{- with site.Params.comments.giscus }}
+{{- if and .repo .repoId }}
+<script src="https://giscus.app/client.js"
+  data-repo="{{ .repo }}"
+  data-repo-id="{{ .repoId }}"
+  data-category="{{ .category | default "Announcements" }}"
+  data-category-id="{{ .categoryId }}"
+  data-mapping="{{ .mapping | default "pathname" }}"
+  data-strict="{{ .strict | default false }}"
+  data-reactions-enabled="{{ .reactionsEnabled | default true }}"
+  data-emit-metadata="{{ .emitMetadata | default false }}"
+  data-input-position="{{ .inputPosition | default "bottom" }}"
+  data-lang="{{ .lang | default "zh-CN" }}"
+  data-loading="{{ .loading | default "lazy" }}"
+  crossorigin="anonymous"
+  async>
+</script>
+{{- else }}
+  {{- /* repoId 未填写时不渲染评论框，避免 Giscus 报错。到 config.toml 的 [params.comments.giscus] 填好 repoId/categoryId 即生效。 */ -}}
+{{- end }}
+{{- end }}
+{{- /* Comments area end */ -}}

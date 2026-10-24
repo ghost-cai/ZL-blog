@@ -125,3 +125,84 @@ body {
   z-index: 999;
   transition: width 0.1s linear;
 }
+
+/* ---------- 7. 相关文章（文末，由 extend_post_content.html 注入）---------- */
+.related-posts {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.related-title {
+  font-size: 1.15rem;
+  margin-bottom: 0.9rem;
+  color: var(--primary);
+}
+.related-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.related-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.related-item:hover {
+  background: var(--tertiary);
+  transform: translateX(3px);
+}
+.related-link {
+  color: var(--content);
+  text-decoration: none;
+  font-weight: 500;
+}
+.related-link:hover { color: var(--accent); }
+.related-date {
+  flex: none;
+  color: var(--secondary);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 8. 归档时间轴（archives 页）---------- */
+.archive-year-header,
+.archive-month-header {
+  color: var(--primary);
+}
+.archive-year-header { margin-top: 2rem; }
+.archive-entry {
+  position: relative;
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.archive-entry:hover {
+  background: var(--tertiary);
+  transform: translateX(3px);
+}
+.archive-entry-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+.archive-entry-title a,
+.archive-entry .entry-link { color: var(--content); text-decoration: none; }
+.archive-entry:hover .archive-entry-title { color: var(--accent); }
+.archive-meta { font-size: 0.82rem; color: var(--secondary); }
+.archive-count {
+  color: var(--secondary);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+/* 左侧时间轴竖线 */
+.archive-posts {
+  border-left: 2px solid var(--border);
+  padding-left: 1.1rem;
+  margin-left: 0.4rem;
+}
