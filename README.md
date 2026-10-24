@@ -69,16 +69,16 @@ hugo server -D --navigateToUpdatedFiles
 
 ## 五、连接到你自己的 GitHub 仓库
 
-1. 在 GitHub 新建仓库（命名为 `ghost-cai.github.io` 以得到根域名 `https://ghost-cai.github.io/`）。
+1. 在 GitHub 新建仓库（命名为 `ZL-blog`；访问地址为 `https://ghost-cai.github.io/ZL-blog/`）。
 2. 本项目已 `git init`（分支 main），添加远程并推送：
 
    ```bash
-   git remote add origin https://github.com/ghost-cai/ghost-cai.github.io.git
+   git remote add origin https://github.com/ghost-cai/ZL-blog.git
    git push -u origin main
    ```
 
 3. 仓库 **Settings → Pages → Source 选择 "GitHub Actions"**。
-4. 推送后到 Actions 标签页看构建，成功后访问 `https://ghost-cai.github.io/`。
+4. 推送后到 Actions 标签页看构建，成功后访问 `https://ghost-cai.github.io/ZL-blog/`。
 
 ## 六、开始之前要改的占位符
 

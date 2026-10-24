@@ -1,4 +1,4 @@
-baseURL = "https://ghost-cai.github.io/"
+baseURL = "https://ghost-cai.github.io/ZL-blog/"
 languageCode = "zh-cn"
 title = "我的博客"
 theme = "PaperMod"
@@ -38,7 +38,7 @@ enableGitInfo = false
 
 # 评论系统（Giscus，可选）：到 giscus.app 生成参数后，取消下面注释并填入即可启用
 # [params.comments.giscus]
-#   repo = "ghost-cai/ghost-cai.github.io"
+#   repo = "ghost-cai/ZL-blog"
 #   repoId = ""
 #   category = "Announcements"
 #   categoryId = ""
