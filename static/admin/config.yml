@@ -2,8 +2,7 @@ backend:
   name: github
   repo: ghost-cai/ZL-blog
   branch: main
-  # ↓↓↓ 把下面的 URL 换成你部署好的 Cloudflare Worker 地址（结尾不带斜杠）↓↓↓
-  base_url: https://REPLACE-ME.workers.dev
+  base_url: https://zlblog-oauth.1786726227.workers.dev
   auth_endpoint: auth
 
 # 发布模式：editorial_workflow 会先生成 PR，可审核后再发布（可选，也可删掉这行）
