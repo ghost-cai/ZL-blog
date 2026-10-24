@@ -4,8 +4,11 @@ title = "我的博客"
 theme = "PaperMod"
 
 summaryLength = 20
-pagination = 5
 enableGitInfo = false
+
+[pagination]
+  pagerSize = 5
+  path = "page"
 
 [params]
   defaultTheme = "auto"
