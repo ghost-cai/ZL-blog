@@ -1,0 +1,13 @@
+# Hugo 构建产物
+/public/
+/resources/_gen/
+/resources/
+
+# 系统文件
+.DS_Store
+
+# WorkBuddy 项目目录（不属于博客仓库）
+.workbuddy/
+
+# 若把 hugo 二进制放进项目则忽略
+/hugo

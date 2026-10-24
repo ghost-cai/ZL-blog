@@ -1,0 +1,51 @@
+baseURL = "https://<你的GitHub用户名>.github.io/"
+languageCode = "zh-cn"
+title = "我的博客"
+theme = "PaperMod"
+
+summaryLength = 20
+pagination = 5
+enableGitInfo = false
+
+[params]
+  defaultTheme = "auto"
+  disableThemeToggle = false
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+
+  [params.homeInfoParams]
+    Title = "你好，欢迎来到我的博客"
+    Content = "这里记录我的随笔、学习与思考。"
+
+  [params.social]
+    GitHub = "https://github.com/<你的GitHub用户名>"
+    Email = ""
+
+[[menu.main]]
+  identifier = "posts"
+  name = "文章"
+  url = "/posts/"
+  weight = 1
+
+[[menu.main]]
+  identifier = "about"
+  name = "关于"
+  url = "/about/"
+  weight = 2
+
+# 评论系统（Giscus，可选）：到 giscus.app 生成参数后填入即可启用
+[params.comments.giscus]
+  repo = "<你的GitHub用户名>/<你的仓库名>"
+  repoId = ""
+  category = "Announcements"
+  categoryId = ""
+  mapping = "pathname"
+  strict = false
+  reactionsEnabled = true
+  emitMetadata = false
+  inputPosition = "bottom"
+  lang = "zh-CN"
+  loading = "lazy"
