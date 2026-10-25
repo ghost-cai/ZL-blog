@@ -96,7 +96,7 @@
       if (posts) return cb();
       if (loading) return;
       loading = true;
-      fetch({{ "index.json" | absLangURL | printf "%q" }})
+      fetch("{{ "index.json" | absLangURL }}")
         .then(function (r) { return r.json(); })
         .then(function (data) { posts = data || []; loading = false; cb(); })
         .catch(function () { loading = false; });
