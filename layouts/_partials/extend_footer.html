@@ -71,4 +71,99 @@
       if (e.persisted) document.body.classList.remove('page-leaving'); /* bfcache 返回恢复 */
     });
   })();
+  /* 顶栏搜索框：博客标题模糊搜索下拉（数据来自 index.json，懒加载一次） */
+  (function () {
+    var form = document.querySelector('.topbar-search');
+    var input = form && form.querySelector('input[name="q"]');
+    if (!form || !input) return;
+
+    var posts = null, loading = false;
+    var results = [], active = -1, box = null, timer = null;
+
+    function openBox() {
+      if (!box) {
+        box = document.createElement('div');
+        box.className = 'topbar-search-results';
+        form.appendChild(box);
+      }
+      return box;
+    }
+    function closeBox() {
+      if (box) { box.remove(); box = null; }
+      results = []; active = -1;
+    }
+    function loadIndex(cb) {
+      if (posts) return cb();
+      if (loading) return;
+      loading = true;
+      fetch({{ "index.json" | absLangURL | printf "%q" }})
+        .then(function (r) { return r.json(); })
+        .then(function (data) { posts = data || []; loading = false; cb(); })
+        .catch(function () { loading = false; });
+    }
+    /* 模糊匹配：查询的每个字符按顺序出现在标题中即命中 */
+    function fuzzy(q, text) {
+      q = q.toLowerCase(); text = text.toLowerCase();
+      var i = 0;
+      for (var j = 0; j < text.length && i < q.length; j++) {
+        if (text.charAt(j) === q.charAt(i)) i++;
+      }
+      return i === q.length;
+    }
+    function run(q) {
+      results = posts.filter(function (p) { return p.title && fuzzy(q, p.title); }).slice(0, 8);
+      active = -1;
+      var b = openBox();
+      b.innerHTML = '';
+      if (!results.length) {
+        b.innerHTML = '<div class="ts-empty">没有匹配的文章</div>';
+        return;
+      }
+      results.forEach(function (p) {
+        var a = document.createElement('a');
+        a.href = p.permalink;
+        a.textContent = p.title;
+        a.addEventListener('mousedown', function (e) {
+          e.preventDefault();          /* 抢在 blur 之前跳转 */
+          location.href = p.permalink;
+        });
+        b.appendChild(a);
+      });
+    }
+    input.addEventListener('input', function () {
+      clearTimeout(timer);
+      var q = input.value.trim();
+      if (!q) { closeBox(); return; }
+      timer = setTimeout(function () {
+        if (posts) run(q);
+        else loadIndex(function () { if (input.value.trim() === q) run(q); });
+      }, 150);
+    });
+    input.addEventListener('keydown', function (e) {
+      var items = box ? box.querySelectorAll('a') : [];
+      if (e.key === 'ArrowDown' && items.length) {
+        e.preventDefault();
+        active = (active + 1) % items.length;
+      } else if (e.key === 'ArrowUp' && items.length) {
+        e.preventDefault();
+        active = (active - 1 + items.length) % items.length;
+      } else if (e.key === 'Enter') {
+        if (active >= 0 && items[active]) {
+          e.preventDefault();
+          location.href = items[active].getAttribute('href');
+        }
+        return;                       /* 无选中项时走表单默认 → /search/?q= */
+      } else if (e.key === 'Escape') {
+        closeBox();
+        return;
+      } else {
+        return;
+      }
+      items.forEach(function (el, i) { el.classList.toggle('active', i === active); });
+    });
+    document.addEventListener('click', function (e) {
+      if (box && !form.contains(e.target)) closeBox();
+    });
+    input.addEventListener('search', function () { if (!input.value) closeBox(); });
+  })();
 </script>

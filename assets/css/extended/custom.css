@@ -229,8 +229,9 @@ a { color: var(--primary); }
 .topbar-btn:hover { background: var(--btn-plain-bg-hover); }
 .topbar-btn svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
 
-/* 顶栏搜索框（Fuwari 式药丸输入框） */
+/* 顶栏搜索框（Fuwari 式药丸输入框 + 标题模糊搜索下拉） */
 .topbar-search {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.45rem;
@@ -258,6 +259,45 @@ a { color: var(--primary); }
   appearance: none;
 }
 .topbar-search input::placeholder { color: var(--text-muted); }
+
+/* 搜索下拉结果列表 */
+.topbar-search-results {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  width: max(100%, 15rem);
+  background: var(--float-panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--card-shadow);
+  padding: 0.35rem;
+  max-height: 18rem;
+  overflow-y: auto;
+  z-index: 60;
+}
+.topbar-search-results a {
+  display: block;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.5rem;
+  color: var(--content);
+  text-decoration: none;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.topbar-search-results a:hover,
+.topbar-search-results a.active {
+  background: var(--btn-plain-bg-hover);
+  color: var(--primary);
+}
+.ts-empty {
+  padding: 0.55rem 0.7rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
 
 /* 主题图标：按当前主题显示对应图标 */
 .theme-toggle .sun { display: none; }
