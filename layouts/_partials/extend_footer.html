@@ -17,4 +17,58 @@
     window.addEventListener('resize', update, { passive: true });
     update();
   })();
+
+  /* 顶栏主题切换：与 PaperMod 共用 localStorage["pref-theme"] + html[data-theme] */
+  (function () {
+    var btn = document.getElementById('topbar-theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var cur = document.documentElement.getAttribute('data-theme');
+      var next = (cur === 'dark') ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('pref-theme', next); } catch (e) {}
+    });
+  })();
+
+  /* 顶栏搜索框：从 /search/?q=xxx 进来时自动填入并执行搜索（等索引加载完） */
+  (function () {
+    var q = new URLSearchParams(location.search).get('q');
+    if (!q) return;
+    var tries = 0;
+    (function fill() {
+      var inp = document.getElementById('searchInput');
+      if (inp && !inp.disabled) {
+        inp.value = q;
+        inp.dispatchEvent(new Event('input'));
+      } else if (tries++ < 40) {
+        setTimeout(fill, 250);
+      }
+    })();
+  })();
+  /* 页面跳转过渡（仿 Fuwari）：点击站内链接先淡出再跳转，新页面由 CSS 动画淡入 */
+  (function () {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function ok(a) {
+      if (!a || a.hasAttribute('download') || a.target === '_blank') return false;
+      var href = a.getAttribute('href') || '';
+      if (!href || href.charAt(0) === '#') return false;               /* 页内锚点 */
+      if (a.protocol && !/^https?:$/.test(a.protocol)) return false;   /* mailto/tel 等 */
+      if (a.origin && a.origin !== location.origin) return false;      /* 外链 */
+      if (/\/admin(\/|$)/.test(a.pathname || '')) return false;        /* Decap 后台 */
+      if (a.pathname + a.search === location.pathname + location.search && a.hash) return false;
+      return true;
+    }
+    document.addEventListener('click', function (e) {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.defaultPrevented) return;
+      var t = e.target;
+      var a = t && t.closest ? t.closest('a') : null;
+      if (!ok(a)) return;
+      e.preventDefault();
+      document.body.classList.add('page-leaving');
+      setTimeout(function () { location.href = a.href; }, 170);
+    }, true);
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) document.body.classList.remove('page-leaving'); /* bfcache 返回恢复 */
+    });
+  })();
 </script>

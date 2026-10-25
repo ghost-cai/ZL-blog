@@ -1,0 +1,56 @@
+<aside class="side">
+  {{/* 1. 个人资料卡片（Fuwari Profile） */}}
+  <section class="card-base side-card side-card--profile">
+    {{- with .Site.Params.sidebar.avatar }}
+    <img class="side-avatar" src="{{ . | absURL }}" alt="头像" width="200" height="200" />
+    {{- end }}
+    <span class="side-name">
+      {{- with .Site.Params.sidebar.title }}{{ . | markdownify }}{{ else }}{{ .Site.Title | markdownify }}{{ end -}}
+    </span>
+    <span class="side-bar"></span>
+    {{- with .Site.Params.sidebar.subtitle }}
+    <p class="side-subtitle">{{ . | markdownify }}</p>
+    {{- end }}
+    {{- with .Site.Params.socialIcons }}
+    <div class="social-icons side-social">
+      {{- range . }}
+      <a class="btn-icon" href="{{ trim .url " " | safeURL }}" target="_blank" rel="noopener noreferrer me"
+         title="{{ (.title | default .name) | title }}" aria-label="{{ (.title | default .name) | title }}">
+        {{ partial "svg.html" . }}
+      </a>
+      {{- end }}
+    </div>
+    {{- end }}
+  </section>
+
+  {{/* 2. 类别卡片（带计数徽标） */}}
+  {{- $cats := site.Taxonomies.categories.ByCount }}
+  {{- with $cats }}
+  <section class="card-base side-card">
+    <h3 class="side-card-title">类别</h3>
+    <ul class="side-cats">
+      {{- range . }}
+      <li>
+        <a href="{{ .Page.RelPermalink }}">
+          <span class="name">{{ .Page.Title }}</span>
+          <span class="count">{{ .Count }}</span>
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
+  {{/* 3. 标签卡片（药丸云，最多 12 个） */}}
+  {{- $tags := first 12 site.Taxonomies.tags.ByCount }}
+  {{- with $tags }}
+  <section class="card-base side-card">
+    <h3 class="side-card-title">标签</h3>
+    <div class="side-tags">
+      {{- range . }}
+      <a class="side-tag" href="{{ .Page.RelPermalink }}">{{ .Page.Title }}<span class="count">{{ .Count }}</span></a>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+</aside>

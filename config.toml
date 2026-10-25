@@ -1,5 +1,5 @@
 baseURL = "https://ghost-cai.github.io/ZL-blog/"
-languageCode = "zh-cn"
+locale = "zh-cn"
 title = "我的博客"
 theme = "PaperMod"
 
@@ -26,37 +26,50 @@ enableGitInfo = false
   mainSections = ["posts"]
   # 评论区开关：存在 [params.comments.giscus] 表即为开启（内容由 layouts/_partials/comments.html 渲染）
 
-  [params.homeInfoParams]
-    Title = "你好，欢迎来到我的博客"
-    Content = "这里记录我的随笔、学习与思考。"
+  # 首页封面图（放在 static/img/cover.jpg，可自行替换；留空则用渐变兜底）
+  coverImage = "img/cover.jpg"
 
-  [params.social]
-    GitHub = "https://github.com/ghost-cai"
-    Email = ""
+  # 左侧栏资料（头像放 static/img/avatar.jpg，可自行替换）
+  [params.sidebar]
+    avatar = "img/avatar.jpg"
+    title = "你好，欢迎来到我的博客"
+    subtitle = "这里记录我的随笔、学习与思考。"
+
+  # 左侧栏社交图标（name 需为 PaperMod 内置图标名小写：github / email / rss / twitter 等）
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/ghost-cai"
+    title = "GitHub"
 
 [[menu.main]]
-  identifier = "posts"
-  name = "文章"
-  url = "/posts/"
+  identifier = "home"
+  name = "首页"
+  url = "/"
   weight = 1
-
-[[menu.main]]
-  identifier = "about"
-  name = "关于"
-  url = "/about/"
-  weight = 2
 
 [[menu.main]]
   identifier = "archives"
   name = "归档"
   url = "/archives/"
+  weight = 2
+
+[[menu.main]]
+  identifier = "categories"
+  name = "分类"
+  url = "/categories/"
   weight = 3
 
 [[menu.main]]
-  identifier = "search"
-  name = "搜索"
-  url = "/search/"
+  identifier = "tags"
+  name = "标签"
+  url = "/tags/"
   weight = 4
+
+[[menu.main]]
+  identifier = "about"
+  name = "关于"
+  url = "/about/"
+  weight = 5
 
 # 评论系统（Giscus）
 # 启用步骤：

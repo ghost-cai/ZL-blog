@@ -5,6 +5,9 @@ backend:
   base_url: https://zlblog-oauth.1786726227.workers.dev
   auth_endpoint: auth
 
+# 界面语言：简体中文（顶栏 Contents/Workflow/Media、按钮、提示等全部中文化）
+locale: zh_Hans
+
 # 发布模式：editorial_workflow 会先生成 PR，可审核后再发布（可选，也可删掉这行）
 publish_mode: editorial_workflow
 
@@ -29,6 +32,6 @@ collections:
         widget: object
         required: false
         fields:
-          - { name: image, label: 图片, widget: image }
-          - { name: alt, label: 替代文字, widget: string }
+          - { name: image, label: 图片, widget: image, required: false }
+          - { name: alt, label: 替代文字, widget: string, required: false }
       - { name: body, label: 正文, widget: markdown }
