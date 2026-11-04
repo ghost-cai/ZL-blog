@@ -2,6 +2,7 @@
 
 基于 **Hugo + GitHub Pages + GitHub Actions** 的静态博客。用 Markdown 写作，推送到 GitHub 即自动部署。
 
+访问地址：https://ghost-cai.github.io/ZL-blog
 ## 目录结构
 
 ```
